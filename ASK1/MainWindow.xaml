@@ -1,12 +1,86 @@
-﻿<Window x:Class="ASK1.MainWindow"
+﻿<Window x:Class="uPSimulator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ASK1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="564"/>
+            <RowDefinition Height="Auto" MinHeight="55"/>
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Left" Margin="20,25,0,0" TextWrapping="Wrap" Background="AliceBlue" VerticalAlignment="Top" Height="333" Width="190" Name="instruction_list"/>
+        <StackPanel Visibility="Visible" HorizontalAlignment="Left" Height="200" Margin="250,23,0,0" VerticalAlignment="Top" Width="100" Name="commands_panel">
+            <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="Command" TextAlignment="Center"  VerticalAlignment="Top" Width="100"/>
+            <RadioButton Name="mov" Content="MOV" HorizontalAlignment="Center" Margin="0,5,-5,0" VerticalAlignment="Top" Height="20" Width="95" Checked="mov_Checked"/>
+            <RadioButton Name="add" Content="ADD" HorizontalAlignment="Center" Margin="0,5,-5,0" VerticalAlignment="Top" Height="20" Width="95" Checked="add_Checked"/>
+            <RadioButton Name="sub" Content="SUB" HorizontalAlignment="Center" Margin="0,5,-5,0" VerticalAlignment="Top" Height="20" Width="95" Checked="sub_Checked"/>
+            <RadioButton Name="int" Content="INT" HorizontalAlignment="Center" Margin="0,5,-5,0" VerticalAlignment="Top" Height="20" Width="95" Checked="int_Checked"/>
+            <RadioButton Name="push" Content="PUSH" HorizontalAlignment="Center" Margin="0,5,-5,0" VerticalAlignment="Top" Height="20" Width="95" Checked="push_Checked"/>
+            <RadioButton Name="pop" Content="POP" HorizontalAlignment="Center" Margin="0,5,-5,0" VerticalAlignment="Top" Height="20" Width="95" Checked="pop_Checked"/>
+        </StackPanel>
+        <StackPanel Visibility="Hidden" HorizontalAlignment="Left" Height="230" Margin="380,24,0,0" VerticalAlignment="Top" Width="100" Name="operand1_panel">
+            <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="Operand #1" TextAlignment="Center"  VerticalAlignment="Top" Width="100"/>
+            <RadioButton IsChecked="True" Name="ah1" Content="AH" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="al1" Content="AL" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="bh1" Content="BH" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="bl1" Content="BL" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="ch1" Content="CH" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="cl1" Content="CL" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="dh1" Content="DH" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="dl1" Content="DL" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+        </StackPanel>
+        <StackPanel Visibility="Hidden" HorizontalAlignment="Left" Height="230" Margin="380,24,0,0" VerticalAlignment="Top" Width="100" Name="stack_register">
+            <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="Register" TextAlignment="Center"  VerticalAlignment="Top" Width="100"/>
+            <RadioButton IsChecked="True" Name="ax" Content="AX" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="bx" Content="BX" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="cx" Content="CX" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="dx" Content="DX" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+        </StackPanel>
+        <StackPanel Visibility="Hidden" HorizontalAlignment="Left" Height="300" Margin="510,24,0,0" VerticalAlignment="Top" Width="100" Name="operand2_panel">
+            <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="Operand #2" TextAlignment="Center"  VerticalAlignment="Top" Width="100" />
+            <RadioButton IsChecked="True" Name="ah2" Content="AH" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="al2" Content="AL" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="bh2" Content="BH" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="bl2" Content="BL" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="ch2" Content="CH" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="cl2" Content="CL" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="dh2" Content="DH" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="dl2" Content="DL" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <RadioButton Name="num" Content="number:" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Height="20" Width="95"/>
+            <TextBox Name="x" Height="20" Width="70" TextWrapping="Wrap"  Margin="0,0,0,0"/>
+        </StackPanel>
+        <Button Content="Apply command" HorizontalAlignment="Left" Margin="640,40,0,0" VerticalAlignment="Top" Background="LightBlue" Width="110" Height="30" Click="Apply_Command"/>
+        <Button Content="Run" HorizontalAlignment="Left" Margin="326,366,0,0" VerticalAlignment="Top" Background="Red" Width="110" Height="34" Click="Run"/>
+        <Button Content="Run step" HorizontalAlignment="Left" Margin="500,366,0,0" VerticalAlignment="Top" Background="Red" Width="110" Height="34" Click="Single_Stepping"/>
+        <CheckBox Content="Single stepping" HorizontalAlignment="Left" Margin="500,343,0,0" VerticalAlignment="Top" Name="step" Height="15" Width="102"/>
+        <Button Content="Clear commands" HorizontalAlignment="Left" Margin="640,90,0,0" VerticalAlignment="Top" Background="LightBlue" Width="110" Height="30" Click="Clear_Commands"/>
+        <Button Content="Clear registers" HorizontalAlignment="Left" Margin="640,140,0,0" VerticalAlignment="Top" Background="LightBlue" Width="110" Height="30" Click="Clear_Registers"/>
+        <TextBlock Text="0x0" HorizontalAlignment="Left" Height="28" Margin="40,372,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Name="AH_VAL"/>
+        <TextBlock Text="0x0" HorizontalAlignment="Left" Height="28" Margin="140,372,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Name="AL_VAL"/>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,372,0,0" TextAlignment="Center" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Text="AH:" VerticalAlignment="Top" Width="25"/>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="110,372,0,0" TextAlignment="Center" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Text="AL:" VerticalAlignment="Top" Width="25"/>
+        <TextBlock Text="0x0" HorizontalAlignment="Left" Height="27" Margin="40,420,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Name="BH_VAL"/>
+        <TextBlock Text="0x0" HorizontalAlignment="Left" Height="27" Margin="140,420,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Name="BL_VAL"/>
+        <TextBlock HorizontalAlignment="Left" Height="27" Margin="10,420,0,0" TextAlignment="Center" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Text="BH:" VerticalAlignment="Top" Width="25"/>
+        <TextBlock HorizontalAlignment="Left" Height="27" Margin="110,420,0,0" TextAlignment="Center" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Text="BL:" VerticalAlignment="Top" Width="25"/>
+        <TextBlock Text="0x0" HorizontalAlignment="Left" Height="27" Margin="40,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Name="CH_VAL"/>
+        <TextBlock Text="0x0" HorizontalAlignment="Left" Height="27" Margin="140,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Name="CL_VAL"/>
+        <TextBlock HorizontalAlignment="Left" Height="27" Margin="10,467,0,0" TextAlignment="Center" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Text="CH:" VerticalAlignment="Top" Width="25"/>
+        <TextBlock HorizontalAlignment="Left" Height="27" Margin="110,467,0,0" TextAlignment="Center" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Text="CL:" VerticalAlignment="Top" Width="25"/>
+        <TextBlock Text="0x0" HorizontalAlignment="Left" Height="28" Margin="40,514,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Name="DH_VAL"/>
+        <TextBlock Text="0x0" HorizontalAlignment="Left" Height="28" Margin="140,514,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Name="DL_VAL"/>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,514,0,0" TextAlignment="Center" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Text="DH:" VerticalAlignment="Top" Width="25"/>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="110,514,0,0" TextAlignment="Center" FontSize="12" FontWeight="Bold" TextWrapping="Wrap" Text="DL:" VerticalAlignment="Top" Width="25"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,5,0,0" TextWrapping="Wrap" Text="Instruction List" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Top" Width="180" Height="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="640,330,0,0" TextWrapping="Wrap" Text="Current instruction:" TextAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" Height="20" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="640,355,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" FontFamily="comic-sans" FontSize="16" FontWeight="ExtraBold" Height="45" Width="120" Name="instruction_number"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="640,190,0,0" VerticalAlignment="Top" Background="LightGreen" Width="110" Height="30" Click="Save"/>
+        <Button Content="Load" HorizontalAlignment="Left" Margin="640,240,0,0" VerticalAlignment="Top" Background="LightGreen" Width="110" Height="30" Click="Load"/>
+        <TextBlock HorizontalAlignment="Left" Margin="775,5,0,0" TextWrapping="Wrap" Text="Stack" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Top" Width="180" Height="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="775,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Height="300" Width="190" Name="stack_list"/>
+        <Button Content="HELP" HorizontalAlignment="Left" Height="50" Margin="775,467,0,0" VerticalAlignment="Top" Width="125" Click="help_window"/>
     </Grid>
 </Window>

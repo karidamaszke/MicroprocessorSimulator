@@ -7,12 +7,12 @@ using System.Windows;
 // Ogólne informacje o zestawie są kontrolowane poprzez następujący 
 // zestaw atrybutów. Zmień wartości tych atrybutów, aby zmodyfikować informacje
 // powiązane z zestawem.
-[assembly: AssemblyTitle("ASK1")]
+[assembly: AssemblyTitle("MicroprocessorSimulator")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ASK1")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyProduct("MicroprocessorSimulator")]
+[assembly: AssemblyCopyright("Copyright ©  2019 Karol Damaszke")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
