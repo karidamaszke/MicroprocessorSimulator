@@ -25,14 +25,12 @@ namespace uPSimulator
             InitializeComponent();
             try
             {
-                int_text.Text = File.ReadAllText("interrupt_help.txt", Encoding.Unicode);
+                int_text.Text = File.ReadAllText("C:/Users/Ja/source/repos/ASK2/ASK1/int_help.txt", Encoding.Unicode);
             }
             catch
             {
                 MessageBox.Show("Error! File couldn't be open");
             }
-
-            
         }
     }
 }

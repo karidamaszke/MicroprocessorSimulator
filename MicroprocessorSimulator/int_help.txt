@@ -1,0 +1,52 @@
+﻿MANUAL
+
+Firstly, choose which order you want execute. Then, choose first and, if required, second operand and click button "Apply Command". 
+If your code is ready you can execute whole program with "Run" button, or execute it in single stepping mode with button "Run Step". 
+
+
+LIST OF AVAILABLE INTERRUPTS:
+
+INT 21H
+
+You can choose one of DOS interrupts by setting AH register with:
+
+- 0H
+	- this interrupt will terminate your program,
+
+- 1H
+	- this interrupt will display any input from keyboard,
+
+- 2H
+	- this interrupt will display a char, which respond to number in DL 
+	register (ASCII code),
+	
+- 3H:
+	- this interrupt will launch command terminal,
+
+- 19H:
+	- this interrupt will set AL register with ASCII code of current disk letter,
+
+- 2AH:
+	- this interrupt will set registers with current date:
+		- AL with number of day in week,
+		- DL with number of day,
+		- DH with number of month,
+		- CX with number of year,
+
+- 2CH:
+	- this interrupt will set registers with current time:
+		- DL with number of miliseconds,
+		- DH with number of seconds,
+		- CL with number of minutes,
+		- CH with number of hours,
+		
+- 30H:
+	- this interrupt will display version of operating system, moreover:
+		- AL register will be set with major version,
+		- AH register will be set with minor version,
+
+- 49H:
+	- this interrupt will clear all registers,
+
+-EDH:
+	- this interrupt will clear any file. For safety, in our application only file with saved code, created in this program by SAVE button, can be cleared.

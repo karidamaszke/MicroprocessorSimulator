@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Text;
 using System.Threading;
-
+using System.Windows.Input;
 
 namespace uPSimulator
 {
@@ -48,6 +48,7 @@ namespace uPSimulator
         // helper variables
         public int number;
         public int step_index = 0;
+        public bool enable_key_int = false;
 
 
         // main constructor
@@ -93,7 +94,6 @@ namespace uPSimulator
         {
             if (step_index == commands.Count())
             {
-                Thread.Sleep(2000);
                 step_index = 0;
                 Clear_Registers(sender, e);
             }
@@ -478,8 +478,12 @@ namespace uPSimulator
                 case 0:
                     this.Close();
                     break;
-                // run command terminal
+                // keyboard interrupt
                 case 1:
+                    enable_key_int = true;
+                    break;
+                // run command terminal
+                case 3:
                     Process.Start("cmd.exe");
                     break;
                 // display char from DL register
@@ -514,6 +518,15 @@ namespace uPSimulator
                     RAL.value = (byte)os.Version.Major;
                     RAH.value = (byte)os.Version.Minor;
                     break;
+                // free memory
+                case 73:
+                    List<Register> registers = new List<Register> { RAH, RAL, RBH, RBL, RCH, RCL, RDH, RDL };
+                    foreach (Register register in registers)
+                    {
+                        register.value = 0;
+                    }
+                    RefreshRegisters();
+                    break;
                 // clear code.txt file
                 case 237:
                     try
@@ -528,6 +541,26 @@ namespace uPSimulator
                     break;
             }
 
+        }
+
+        // keyboard interrupt functions
+        private void keyboard_int(object sender, RoutedEventArgs e)
+        {
+            if(enable_key_int == true)
+            {
+                this.PreviewKeyDown += display_char;
+                this.Focusable = true;
+                this.Focus();
+            }
+        }
+
+        private void display_char(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("You entered: " + e.Key.ToString());
+            RAL.value = (byte)(int)e.Key;
+            this.PreviewKeyDown -= display_char;
+            enable_key_int = false;
+            RefreshRegisters();
         }
 
 
@@ -595,7 +628,7 @@ namespace uPSimulator
         private void help_window(object sender, RoutedEventArgs e)
         {
             InterruptHelp help_window = new InterruptHelp();
-            help_window.Show();
+            help_window.ShowDialog();
         }
     }
 }
